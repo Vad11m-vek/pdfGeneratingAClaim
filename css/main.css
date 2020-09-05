@@ -1,0 +1,133 @@
+@charset "UTF-8";
+.wrapper_page {
+  line-height: 1.2em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: wrap;
+          flex-direction: wrap;
+}
+
+.wrapper_page input {
+  border: 0;
+  border-bottom: solid black 1px;
+}
+
+.wrapper_page textarea:focus, .wrapper_page input:focus {
+  outline: none;
+}
+
+.wrapper_page input[type="file"] {
+  border: 0;
+}
+
+.column_write {
+  width: 100%;
+  margin-left: 15px;
+}
+
+.column_write .wrapper_header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.column_write .wrapper_header .header_np {
+  width: 60%;
+}
+
+.column_write .wrapper_header .header_np input {
+  display: block;
+  width: 250px;
+}
+
+.column_write h3 {
+  text-align: center;
+}
+
+.column_write .wrapp_text .wrapper_defect .defect {
+  display: inline;
+}
+
+.column_write .wrapp_text .reimburseTheCostPaidFor .choiceOfCompensationFor {
+  display: inline;
+}
+
+.column_write .wrapp_text .cancellationTheCostPaidFor .cancellationСhoiceOfCompensationFor {
+  display: inline;
+}
+
+.column_write .theEssenceOfTheProblem {
+  display: block;
+}
+
+.column_write .wrapper_details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.column_write .wrapper_details .FOP {
+  width: 48%;
+}
+
+.column_write .wrapper_details .AccountFOP {
+  width: 48%;
+}
+
+.column_write .dateSignature {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.column_write .dateSignature .detailsAcc {
+  display: inline;
+}
+
+.column_write .dateSignature .outSignature {
+  display: inline;
+}
+
+.column_write .wrapper_clientSignature {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.column_pdf {
+  width: 47%;
+}
+
+#otherProblem {
+  width: 400px;
+}
+
+.comment {
+  font-size: 10px;
+  padding: 5px;
+}
+
+#otherAdditions {
+  width: 500px;
+}
+
+#invoiceNumber {
+  -webkit-appearance: textfield;
+     -moz-appearance: textfield;
+          appearance: textfield;
+}
+
+#invoiceNumber::-webkit-outer-spin-button,
+#invoiceNumber::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

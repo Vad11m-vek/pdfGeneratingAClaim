@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/main.css">
+	<title>Бланк претензії для – юридичних осіб та ФОП</title>
+</head>
+
+<body>
+	<h1>Бланк претензії для – юридичних осіб та ФОП</h1>
+	<div class="wrapper_page">
+		<div class="column_write">
+			<div class="wrapper_header">
+				<div class="header_np">
+					<div>Бланк претензії для – юридичних осіб та ФОП <br>
+						ТОВ «Нова Пошта»</div>
+					<textarea name="comment" cols="40" rows="2" id="nameOfTheLegalEntity">ТОВ "ЛЄММА"</textarea>
+					<label for="nameOfTheLegalEntity">
+						<div class="comment">
+							(Найменування юридичної особи або П.І.Б. ФОП)
+						</div>
+					</label>
+					<div>
+						<label for="TINorUSREOU">
+							ІПН або ЄДРПОУ
+						</label>
+					</div>
+					<input type="text" id="TINorUSREOU" value="39939843">
+					<div>
+						<label for="Location">
+							Місцезнаходження
+						</label>
+					</div>
+					<textarea name="comment" cols="40" rows="3пшн"
+						id="Location">10024, Житомирська обл., місто Житомир, Корольовський район, ВУЛИЦЯ БОРИСА ТЕНА, будинок 102</textarea>
+					<!-- <input type="text" id="Location"
+						value="10024, Житомирська обл., мисто Житомир, Корольовський район, ВУЛИЦЯ БОРИСА ТЕНА, будинок 102, квартира 275"> -->
+					<div>
+						<label for="tel">
+							Моб. тел.
+						</label>
+					</div>
+					<input type="tel" id="tel" value="0633999003">
+					<div>
+						<label for="emailUser">
+							Ел. пошта
+						</label>
+					</div>
+					<input type="email" id="emailUser" value="lemmatrade@gmail.com">
+
+				</div>
+			</div>
+			<h3>ПРЕТЕНЗІЯ</h3>
+			<div class="wrapp_text">
+				<div class="wrapper_defect">
+					<div class="defect">У зв’язку з</div>
+					<input type="checkbox" id="damage">
+					<label for="damage">пошкодженням /</label>
+					<input type="checkbox" id="loss">
+					<label for="loss">втратою /</label>
+					<input type="checkbox" id="lacking">
+					<label for="lacking">недостачею всередині /</label>
+					<input type="checkbox" id="re-sorting">
+					<label for="re-sorting">пересортуванням /</label>
+					<input type="checkbox" id="late">
+					<label for="late">запізненням /</label>
+					<input type="checkbox" id="others">
+					<label for="others">іншим</label>
+				</div>
+				<div class="comment">(підкресліть причину(и) складання Претензії; обравши «інше», обов’язково конкретизуйте
+					причину в полі «Суть проблеми / опис в ідправлення»)
+				</div>
+				<div>відправлення, що сталося під час надання послуги з організації його перевезення за експрес-накладною
+				</div>
+				<label for="invoiceNumber">
+					<div>
+						№
+						<input type="number" id="invoiceNumber">
+						прошу :
+					</div>
+				</label>
+				<div class="comment">(поставте відмітку(и) навпроти необхідного (-их) варіанта(ів) компенсації):</div>
+				<div class="refundPrice">
+					<label for="price"> відшкодувати вартість відправлення в
+						розмірі</label>
+					<input type="text" id="price"> грн.
+				</div>
+				<!-- reimburse -->
+				<div class="reimburseTheCostPaidFor">
+					<span>відшкодувати сплачену вартість</span>
+					<div class="choiceOfCompensationFor">
+						<input type="checkbox" id="transportation">
+						<label for="transportation">перевезення /</label>
+						<input type="checkbox" id="storage">
+						<label for="storage">зберігання /</label>
+						<input type="checkbox" id="redirection">
+						<label for="redirection">переадресування /</label>
+						<input type="checkbox" id="return">
+						<label for="return">повернення .</label>
+					</div>
+					<div class="comment">(оберіть витрати які слід відшкодувати)</div>
+				</div>
+				<!-- cancellation -->
+				<div class="cancellationTheCostPaidFor">
+					<span>анулювати нараховану плату за</span>
+					<div class="cancellationСhoiceOfCompensationFor">
+						<input type="checkbox" id="cancellationTransportation">
+						<label for="cancellationTransportation">перевезення /</label>
+						<input type="checkbox" id="cancellationStorage">
+						<label for="cancellationStorage">зберігання /</label>
+						<input type="checkbox" id="cancellationRedirection">
+						<label for="cancellationRedirection">переадресування /</label>
+						<input type="checkbox" id="cancellationReturn">
+						<label for="cancellationReturn">повернення ;</label>
+					</div>
+					<div class="comment">(оберіть витрати які слід відшкодувати)</div>
+				</div>
+				<div class="other">
+					<label for="otherProblem">інше :</label>
+					<input type="text" id="otherProblem">
+					<div class="comment">(зазначте, що конкретно Клієнт бажає отримати, наприклад: компенсувати вартість за
+						послугу пакування)</div>
+				</div>
+				<div class="commentForProblems">
+					<label for="theEssenceOfTheProblem">Суть проблеми / опис відправлення: </label>
+					<textarea name="comment" cols="100" rows="3" id="theEssenceOfTheProblem"></textarea>
+				</div>
+				<div class="comment">У випадку прийняття рішення щодо оплати суми передбаченої цією претензією (або її
+					частини), зазначені
+					кошти прошу перерахувати на наступні реквізити
+				</div>
+				<div class="wrapper_details">
+					<div class="FOP">
+						<div class="detailsAcc">
+							<label for="nameOfThePerson">
+								Найменування юридичної особи / ФОП
+							</label>
+						</div>
+						<textarea name="comment" cols="40" rows="2" id="nameOfThePerson"></textarea>
+						<div class="detailsAcc">
+							<label for="identificationCode">
+								Ідентифікаційний код юридичної особи або ІПН ФОП
+							</label>
+						</div>
+						<input type="text" id="identificationCode">
+
+					</div>
+					<div class="AccountFOP">
+						<div class="detailsAcc">
+							<label for="currentAccount">
+								Розрахунковий рахунок
+							</label>
+						</div>
+						<input type="text" id="currentAccount">
+						<div class="detailsAcc">
+							<label for="MFIBank">
+								МФО банку
+							</label>
+						</div>
+						<input type="text" id="MFIBank">
+						<div class="wrapper_clientSignature">
+							<div class="wrapperOutSignature">
+								<label for="clientSignature">
+									<div class="detailsAcc">
+										Підпис Клієнта :
+									</div>
+									<div class="outSignature">
+										____________________
+									</div>
+								</label>
+							</div>
+							<div class="wrapperInputSignature">
+								<input type="file" id="clientSignature">
+								<div class="comment">(Завантажте фото вашого підпису)</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="Additions">
+					<div class="detailsAcc">
+						Додатки:
+					</div>
+					<div>
+						<input type="checkbox" id="copyOfTheAct">
+						<label for="copyOfTheAct">Копія Акта приймання-передачі від <input type="date">, складеного з
+							представником ТОВ «Нова
+							Пошта».
+						</label>
+					</div>
+					<div>
+						<input type="checkbox" id="aCopyOfTheDocumentConfirmingTheCostOfSending">
+						<label for="aCopyOfTheDocumentConfirmingTheCostOfSending">Копія документа, який підтверджує вартість
+							відправлення.</label>
+					</div>
+
+					<label for="otherAdditions">Інше</label>
+					<input type="text" id="otherAdditions">
+				</div>
+				<div class="dateSignature">
+					<div class="dateDoc">
+						<label for="dateDoc">Дата</label>
+						<input type="date" id="dateDoc">
+					</div>
+					<div class="wrapper_clientSignature">
+						<div class="wrapperOutSignature">
+							<label for="clientSignature">
+								<div class="detailsAcc">
+									Підпис Клієнта :
+								</div>
+								<div class="outSignature">
+									____________________
+								</div>
+							</label>
+						</div>
+						<!-- <div class="wrapperInputSignature">
+							<input type="file" id="clientSignature">
+							<div class="comment">(Завантажте фото вашого підпису)</div>
+						</div> -->
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+		<div class="column_pdf">
+			pdf
+		</div>
+
+
+	</div>
+
+	<input type="button" id="start" value="Download">
+	<script type="text/javascript" src="js/mass.js"></script>
+	<script type="text/javascript" src="js/jspdf.debug.js"></script>
+	<script type="text/javascript" src="js/file.js">
+
+
+	</script>
+</body>
+
+</html>
