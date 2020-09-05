@@ -32,7 +32,7 @@
 							Місцезнаходження
 						</label>
 					</div>
-					<textarea name="comment" cols="40" rows="3пшн"
+					<textarea name="comment" cols="40" rows="3"
 						id="Location">10024, Житомирська обл., місто Житомир, Корольовський район, ВУЛИЦЯ БОРИСА ТЕНА, будинок 102</textarea>
 					<!-- <input type="text" id="Location"
 						value="10024, Житомирська обл., мисто Житомир, Корольовський район, ВУЛИЦЯ БОРИСА ТЕНА, будинок 102, квартира 275"> -->
@@ -55,17 +55,17 @@
 			<div class="wrapp_text">
 				<div class="wrapper_defect">
 					<div class="defect">У зв’язку з</div>
-					<input type="checkbox" id="damage">
+					<input type="checkbox" name="defect" id="damage" value="пошкодженням">
 					<label for="damage">пошкодженням /</label>
-					<input type="checkbox" id="loss">
+					<input type="checkbox" name="defect" id="loss" value="втратою">
 					<label for="loss">втратою /</label>
-					<input type="checkbox" id="lacking">
+					<input type="checkbox" name="defect" id="lacking" value="недостачею всередині">
 					<label for="lacking">недостачею всередині /</label>
-					<input type="checkbox" id="re-sorting">
+					<input type="checkbox" name="defect" id="re-sorting" value="пересортуванням">
 					<label for="re-sorting">пересортуванням /</label>
-					<input type="checkbox" id="late">
+					<input type="checkbox" name="defect" id="late" value="запізненням">
 					<label for="late">запізненням /</label>
-					<input type="checkbox" id="others">
+					<input type="checkbox" name="defect" id="others" value="іншим">
 					<label for="others">іншим</label>
 				</div>
 				<div class="comment">(підкресліть причину(и) складання Претензії; обравши «інше», обов’язково конкретизуйте
@@ -90,13 +90,13 @@
 				<div class="reimburseTheCostPaidFor">
 					<span>відшкодувати сплачену вартість</span>
 					<div class="choiceOfCompensationFor">
-						<input type="checkbox" id="transportation">
+						<input type="checkbox" id="transportation" value="перевезення">
 						<label for="transportation">перевезення /</label>
-						<input type="checkbox" id="storage">
+						<input type="checkbox" id="storage" value="зберігання">
 						<label for="storage">зберігання /</label>
-						<input type="checkbox" id="redirection">
+						<input type="checkbox" id="redirection" value="переадресування">
 						<label for="redirection">переадресування /</label>
-						<input type="checkbox" id="return">
+						<input type="checkbox" id="return" value="повернення">
 						<label for="return">повернення .</label>
 					</div>
 					<div class="comment">(оберіть витрати які слід відшкодувати)</div>
@@ -105,13 +105,13 @@
 				<div class="cancellationTheCostPaidFor">
 					<span>анулювати нараховану плату за</span>
 					<div class="cancellationСhoiceOfCompensationFor">
-						<input type="checkbox" id="cancellationTransportation">
+						<input type="checkbox" id="cancellationTransportation" value="перевезення">
 						<label for="cancellationTransportation">перевезення /</label>
-						<input type="checkbox" id="cancellationStorage">
+						<input type="checkbox" id="cancellationStorage" value="зберігання">
 						<label for="cancellationStorage">зберігання /</label>
-						<input type="checkbox" id="cancellationRedirection">
+						<input type="checkbox" id="cancellationRedirection" value="переадресування">
 						<label for="cancellationRedirection">переадресування /</label>
-						<input type="checkbox" id="cancellationReturn">
+						<input type="checkbox" id="cancellationReturn" value="повернення">
 						<label for="cancellationReturn">повернення ;</label>
 					</div>
 					<div class="comment">(оберіть витрати які слід відшкодувати)</div>

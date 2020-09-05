@@ -3,6 +3,10 @@ let $TINorUSREOU = document.querySelector('#TINorUSREOU').value;
 let $Location = document.querySelector('#Location').value;
 let $tel = document.querySelector('#tel').value;
 let $emailUser = document.querySelector('#emailUser').value;
+let $defectCollection = document.querySelectorAll('[name="defect"]');
+let $damage = document.querySelector('#damage').checked;
+console.log($defectCollection);
+
 
 let doc = new jsPDF();
 
@@ -49,4 +53,11 @@ start.addEventListener('click', start => {
 	x.document.write(embed);
 	x.document.close();
 	// doc.save('hello_world.pdf')
+	checking();
 });
+function checking() {
+	if ($damage) {
+		console.log('good');
+
+	}
+};
