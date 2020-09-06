@@ -4,18 +4,25 @@ let $Location = document.querySelector('#Location').value;
 let $tel = document.querySelector('#tel').value;
 let $emailUser = document.querySelector('#emailUser').value;
 let $defectCollection = document.querySelectorAll('[name="defect"]');
+let $reimburseCollection = document.querySelectorAll('[name="reimburse"]');
+let $cancellationCollection = document.querySelectorAll('[name="cancellation"]');
 let defectReasonCollection = '';
+let reimburseReasonCollection = '';
+let cancellationReasonCollection = '';
 let $invoiceNumber = document.querySelector('#invoiceNumber').value;
 let $price = document.querySelector('#price').value;
-console.log($price);
-if (!($price === '')) {
-	console.log('noop');
-} else {
-	console.log('veloseped');
-
-}
 
 
+// cancellation
+
+document.querySelector('h3').addEventListener('click', () => {
+	$price = document.querySelector('#price').value;
+	if ($price.length == 0) {
+		console.log($price.length);
+	} else {
+		console.log('veloseped');
+	}
+})
 
 let doc = new jsPDF();
 function documentWriter() {
@@ -53,16 +60,29 @@ function documentWriter() {
 	doc.text(defectReason, 30, 90);
 	let textDuringTransportation = doc.splitTextToSize('відправлення, що сталося під час надання послуги з організації його перевезення за експрес-накладною', 200)
 	doc.text(textDuringTransportation, 8, 100);
-	doc.text(`№ ${$invoiceNumber} прошу :`, 52, 106);
-	// №  прошу :
+	doc.text(`№ ${$invoiceNumber} прошу :`, 52, 105);
+	// nead update price
+	$price = document.querySelector('#price').value;
+	if (!($price.length == 0)) {
+		doc.text(`відшкодувати вартість відправлення в розмірі ${$price} грн.`, 8, 110);
+	}
+	if (!(reimburseReasonCollection.length == 0)) {
+		doc.text(`відшкодувати сплачену вартість${reimburseReasonCollection}`, 8, 115);
+	}
+	if (!(cancellationReasonCollection.length == 0)) {
+		doc.text(`анулювати нараховану плату за${cancellationReasonCollection}`, 8, 120);
+	}
 
-	// відправлення, що сталося під час надання послуги з організації його перевезення за експрес-накладною
+
+
 	// var strArr = doc.splitTextToSize("A longer title that might be split", 50)
 	// doc.text(strArr, 50, 50);
 }
 //save doc
 start.addEventListener('click', () => {
-	checking();
+	checkingAbout();
+	chekingReimburse();
+	chekingCancellation();
 	documentWriter();
 	var string = doc.output('datauristring');
 	var embed = "<embed width='100%' height='100%' src='" + string + "' />"
@@ -72,7 +92,7 @@ start.addEventListener('click', () => {
 	x.document.close();
 	// doc.save('hello_world.pdf')
 });
-function checking() {
+function checkingAbout() {
 	for (i in $defectCollection) {
 		if ($defectCollection[i].checked == true) {
 			if (!defectReasonCollection) {
@@ -87,4 +107,36 @@ function checking() {
 		defectReasonCollection += document.querySelector('#others').value;
 	}
 	return defectReasonCollection;
+}
+function chekingReimburse() {
+	for (i in $reimburseCollection) {
+		if ($reimburseCollection[i].checked == true) {
+			if (!reimburseReasonCollection) {
+				reimburseReasonCollection += $reimburseCollection[i].value;
+			} else {
+				reimburseReasonCollection += ',';
+				reimburseReasonCollection += $reimburseCollection[i].value;
+			}
+		}
+	}
+	if (reimburseReasonCollection) {
+		reimburseReasonCollection += '.';
+	}
+	return reimburseReasonCollection;
+}
+function chekingCancellation() {
+	for (i in $cancellationCollection) {
+		if ($cancellationCollection[i].checked == true) {
+			if (!cancellationReasonCollection) {
+				cancellationReasonCollection += $cancellationCollection[i].value;
+			} else {
+				cancellationReasonCollection += ',';
+				cancellationReasonCollection += $cancellationCollection[i].value;
+			}
+		}
+	}
+	if (cancellationReasonCollection) {
+		cancellationReasonCollection += ';';
+	}
+	return reimburseReasonCollection;
 }

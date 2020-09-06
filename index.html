@@ -85,19 +85,19 @@
 				<div class="refundPrice">
 					<label for="price"> відшкодувати вартість відправлення в
 						розмірі</label>
-					<input type="text" id="price"> грн.
+					<input type="text" id="price" value="111"> грн.
 				</div>
 				<!-- reimburse -->
 				<div class="reimburseTheCostPaidFor">
 					<span>відшкодувати сплачену вартість</span>
 					<div class="choiceOfCompensationFor">
-						<input type="checkbox" id="transportation" value="перевезення">
+						<input type="checkbox" name="reimburse" id="transportation" value=" перевезення" checked>
 						<label for="transportation">перевезення /</label>
-						<input type="checkbox" id="storage" value="зберігання">
+						<input type="checkbox" name="reimburse" id="storage" value=" зберігання">
 						<label for="storage">зберігання /</label>
-						<input type="checkbox" id="redirection" value="переадресування">
+						<input type="checkbox" name="reimburse" id="redirection" value=" переадресування">
 						<label for="redirection">переадресування /</label>
-						<input type="checkbox" id="return" value="повернення">
+						<input type="checkbox" name="reimburse" id="return" value=" повернення">
 						<label for="return">повернення .</label>
 					</div>
 					<div class="comment">(оберіть витрати які слід відшкодувати)</div>
@@ -106,13 +106,14 @@
 				<div class="cancellationTheCostPaidFor">
 					<span>анулювати нараховану плату за</span>
 					<div class="cancellationСhoiceOfCompensationFor">
-						<input type="checkbox" id="cancellationTransportation" value="перевезення">
+						<input type="checkbox" name="cancellation" id="cancellationTransportation" value=" перевезення"
+							checked>
 						<label for="cancellationTransportation">перевезення /</label>
-						<input type="checkbox" id="cancellationStorage" value="зберігання">
+						<input type="checkbox" name="cancellation" id="cancellationStorage" value=" зберігання">
 						<label for="cancellationStorage">зберігання /</label>
-						<input type="checkbox" id="cancellationRedirection" value="переадресування">
+						<input type="checkbox" name="cancellation" id="cancellationRedirection" value=" переадресування">
 						<label for="cancellationRedirection">переадресування /</label>
-						<input type="checkbox" id="cancellationReturn" value="повернення">
+						<input type="checkbox" name="cancellation" id="cancellationReturn" value=" повернення">
 						<label for="cancellationReturn">повернення ;</label>
 					</div>
 					<div class="comment">(оберіть витрати які слід відшкодувати)</div>
