@@ -11,6 +11,12 @@ let reimburseReasonCollection = '';
 let cancellationReasonCollection = '';
 let $invoiceNumber = document.querySelector('#invoiceNumber').value;
 let $price = document.querySelector('#price').value;
+let $otherProblem = document.querySelector('#otherProblem').value;
+let $theEssenceOfTheProblem = document.querySelector('#theEssenceOfTheProblem').value;
+let $nameOfThePerson = document.querySelector('#nameOfThePerson').value;
+let $identificationCode = document.querySelector('#identificationCode').value;
+let $currentAccount = document.querySelector('#currentAccount').value;
+let $MFIBank = document.querySelector('#MFIBank').value;
 
 
 // cancellation
@@ -26,7 +32,7 @@ document.querySelector('h3').addEventListener('click', () => {
 
 let doc = new jsPDF();
 function documentWriter() {
-	doc.setFontSize(12);
+	doc.setFontSize(10);
 	doc.addFont("font/PTSans.ttf", "PTSans", "normal");
 	doc.setFont("PTSans");
 	doc.text("Бланк претензії для – юридичних осіб та ФОП", 110, 15);
@@ -51,9 +57,9 @@ function documentWriter() {
 	let strEmailUser = doc.splitTextToSize('' + $emailUser, 50)
 	doc.text(strEmailUser, 150, 70);
 	//declare
-	doc.setFontSize(20);
+	doc.setFontSize(15);
 	doc.text("ПРЕТЕНЗІЯ", 80, 80);
-	doc.setFontSize(14);
+	doc.setFontSize(10);
 	//reason
 	doc.text("У зв’язку з ", 8, 90);
 	let defectReason = doc.splitTextToSize('' + defectReasonCollection, 190)
@@ -63,18 +69,41 @@ function documentWriter() {
 	doc.text(`№ ${$invoiceNumber} прошу :`, 52, 105);
 	// nead update price
 	$price = document.querySelector('#price').value;
-	if (!($price.length == 0)) {
+	if ($price.length != 0) {
 		doc.text(`відшкодувати вартість відправлення в розмірі ${$price} грн.`, 8, 110);
 	}
-	if (!(reimburseReasonCollection.length == 0)) {
+	if (reimburseReasonCollection.length != 0) {
 		doc.text(`відшкодувати сплачену вартість${reimburseReasonCollection}`, 8, 115);
 	}
-	if (!(cancellationReasonCollection.length == 0)) {
+	if (cancellationReasonCollection.length != 0) {
 		doc.text(`анулювати нараховану плату за${cancellationReasonCollection}`, 8, 120);
 	}
-
-
-
+	$otherProblem = document.querySelector('#otherProblem').value;
+	if ($otherProblem.length != 0) {
+		doc.text('інше : ', 8, 125);
+		let strotherProblem = doc.splitTextToSize('' + $otherProblem, 190)
+		doc.text(strotherProblem, 21, 125);
+	}
+	//about problem
+	doc.text('Суть проблеми / опис відправлення: ', 8, 135);
+	let strTheEssenceOfTheProblem = doc.splitTextToSize('' + $theEssenceOfTheProblem, 200)
+	doc.text(strTheEssenceOfTheProblem, 8, 140);
+	let textCommentDetails = doc.splitTextToSize('У випадку прийняття рішення щодо оплати суми передбаченої цією претензією (або її частини), зазначені кошти прошу перерахувати на наступні реквізити', 200)
+	doc.text(textCommentDetails, 8, 200);
+	// requisites left column
+	doc.text("Найменування юридичної особи/ФОП", 5, 215);
+	let textNameOfThePerson = doc.splitTextToSize('' + $nameOfThePerson, 110)
+	doc.text(textNameOfThePerson, 5, 220);
+	doc.text('Ідентифікаційний код юридичної особи', 5, 230);
+	doc.text(`${$identificationCode}`, 5, 235);
+	// requisites right column
+	doc.text("Розрахунковий рахунок", 110, 215);
+	doc.text(`${$currentAccount}`, 110, 220);
+	doc.text("МФО банку : ", 110, 225);
+	doc.text(`${$MFIBank}`, 150, 225);
+	//signature
+	doc.addImage("img/10-53-04.jpg", "JPEG", 150, 230, 40, 28);
+	// Ідентифікаційний код юридичної особи або ІПН ФОП
 	// var strArr = doc.splitTextToSize("A longer title that might be split", 50)
 	// doc.text(strArr, 50, 50);
 }
