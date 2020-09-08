@@ -17,10 +17,13 @@ let $nameOfThePerson = document.querySelector('#nameOfThePerson').value;
 let $identificationCode = document.querySelector('#identificationCode').value;
 let $currentAccount = document.querySelector('#currentAccount').value;
 let $MFIBank = document.querySelector('#MFIBank').value;
+let $copyOfTheAct = document.querySelector('#copyOfTheAct');
+let $dateCopyOfTheAct = document.querySelector('#dateCopyOfTheAct').value = moment().format('YYYY-MM-DD');
+let $aCopyOfTheDocumentConfirmingTheCostOfSending = document.querySelector('#aCopyOfTheDocumentConfirmingTheCostOfSending');
+let $dateDoc = document.querySelector('#dateDoc').value = moment().format('YYYY-MM-DD');
 
 
 // cancellation
-
 document.querySelector('h3').addEventListener('click', () => {
 	$price = document.querySelector('#price').value;
 	if ($price.length == 0) {
@@ -66,7 +69,7 @@ function documentWriter() {
 	doc.text(defectReason, 30, 90);
 	let textDuringTransportation = doc.splitTextToSize('відправлення, що сталося під час надання послуги з організації його перевезення за експрес-накладною', 200)
 	doc.text(textDuringTransportation, 8, 100);
-	doc.text(`№ ${$invoiceNumber} прошу :`, 52, 105);
+	doc.text(`№ ${$invoiceNumber} прошу :`, 8, 105);
 	// nead update price
 	$price = document.querySelector('#price').value;
 	if ($price.length != 0) {
@@ -91,18 +94,35 @@ function documentWriter() {
 	let textCommentDetails = doc.splitTextToSize('У випадку прийняття рішення щодо оплати суми передбаченої цією претензією (або її частини), зазначені кошти прошу перерахувати на наступні реквізити', 200)
 	doc.text(textCommentDetails, 8, 200);
 	// requisites left column
-	doc.text("Найменування юридичної особи/ФОП", 5, 215);
+	doc.text("Найменування юридичної особи / ФОП", 5, 215);
 	let textNameOfThePerson = doc.splitTextToSize('' + $nameOfThePerson, 110)
 	doc.text(textNameOfThePerson, 5, 220);
-	doc.text('Ідентифікаційний код юридичної особи', 5, 230);
+	doc.text('Ідентифікаційний код юридичної особи або ІПН ФОП', 5, 230);
 	doc.text(`${$identificationCode}`, 5, 235);
+	//signature img
+	doc.addImage("img/10-53-04.jpg", "JPEG", 120, 220, 46, 34);
+	doc.addImage("img/10-53-04.jpg", "JPEG", 120, 260, 46, 34);
 	// requisites right column
 	doc.text("Розрахунковий рахунок", 110, 215);
 	doc.text(`${$currentAccount}`, 110, 220);
 	doc.text("МФО банку : ", 110, 225);
-	doc.text(`${$MFIBank}`, 150, 225);
-	//signature
-	doc.addImage("img/10-53-04.jpg", "JPEG", 150, 230, 40, 28);
+	doc.text(`${$MFIBank}`, 130, 225);
+	//Additions Додатки:
+	if ($copyOfTheAct.checked || $aCopyOfTheDocumentConfirmingTheCostOfSending.checked) {
+		doc.text("Додатки : ", 5, 245);
+		if ($copyOfTheAct.checked) {
+			$dateCopyOfTheAct = document.querySelector('#dateCopyOfTheAct').value;
+			doc.text(`Копія Акта приймання-передачі від ${reverseValueDate($dateCopyOfTheAct)}р., складеного з представником ТОВ «Нова Пошта».`, 5, 250);
+		}
+		if ($aCopyOfTheDocumentConfirmingTheCostOfSending.checked) {
+			doc.text('Копія документа, який підтверджує вартість відправлення.', 5, 255);
+		}
+	}
+	$dateDoc = document.querySelector('#dateDoc').value;
+	doc.text(`Дата  ${reverseValueDate($dateDoc)}р.`, 5, 290);
+	//signature str
+	doc.text('Підпис Клієнта __________________', 110, 240);
+	doc.text('Підпис Клієнта __________________', 110, 282);
 	// Ідентифікаційний код юридичної особи або ІПН ФОП
 	// var strArr = doc.splitTextToSize("A longer title that might be split", 50)
 	// doc.text(strArr, 50, 50);
@@ -168,4 +188,9 @@ function chekingCancellation() {
 		cancellationReasonCollection += ';';
 	}
 	return reimburseReasonCollection;
+}
+function reverseValueDate(dateReverse) {
+	let massive = dateReverse.split('-').reverse();
+
+	return massive.toString().replace(',', '-').replace(',', '-');
 }
