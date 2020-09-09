@@ -21,7 +21,7 @@ let $copyOfTheAct = document.querySelector('#copyOfTheAct');
 let $dateCopyOfTheAct = document.querySelector('#dateCopyOfTheAct').value = moment().format('YYYY-MM-DD');
 let $aCopyOfTheDocumentConfirmingTheCostOfSending = document.querySelector('#aCopyOfTheDocumentConfirmingTheCostOfSending');
 let $dateDoc = document.querySelector('#dateDoc').value = moment().format('YYYY-MM-DD');
-
+let $otherAdditions = document.querySelector('#otherAdditions').value;
 
 // cancellation
 document.querySelector('h3').addEventListener('click', () => {
@@ -35,7 +35,7 @@ document.querySelector('h3').addEventListener('click', () => {
 
 let doc = new jsPDF();
 function documentWriter() {
-	doc.setFontSize(10);
+	doc.setFontSize(11);
 	doc.addFont("font/PTSans.ttf", "PTSans", "normal");
 	doc.setFont("PTSans");
 	doc.text("Бланк претензії для – юридичних осіб та ФОП", 110, 15);
@@ -60,9 +60,9 @@ function documentWriter() {
 	let strEmailUser = doc.splitTextToSize('' + $emailUser, 50)
 	doc.text(strEmailUser, 150, 70);
 	//declare
-	doc.setFontSize(15);
+	doc.setFontSize(17);
 	doc.text("ПРЕТЕНЗІЯ", 80, 80);
-	doc.setFontSize(10);
+	doc.setFontSize(11);
 	//reason
 	doc.text("У зв’язку з ", 8, 90);
 	let defectReason = doc.splitTextToSize('' + defectReasonCollection, 190)
@@ -108,7 +108,7 @@ function documentWriter() {
 	doc.text("МФО банку : ", 110, 225);
 	doc.text(`${$MFIBank}`, 130, 225);
 	//Additions Додатки:
-	if ($copyOfTheAct.checked || $aCopyOfTheDocumentConfirmingTheCostOfSending.checked) {
+	if ($copyOfTheAct.checked || $aCopyOfTheDocumentConfirmingTheCostOfSending.checked || ($otherAdditions.value != 0)) {
 		doc.text("Додатки : ", 5, 245);
 		if ($copyOfTheAct.checked) {
 			$dateCopyOfTheAct = document.querySelector('#dateCopyOfTheAct').value;
@@ -117,7 +117,13 @@ function documentWriter() {
 		if ($aCopyOfTheDocumentConfirmingTheCostOfSending.checked) {
 			doc.text('Копія документа, який підтверджує вартість відправлення.', 5, 255);
 		}
+		$otherAdditions = document.querySelector('#otherAdditions').value;
+		if ($otherAdditions != 0) {
+			doc.text('інше : ', 5, 260);
+			doc.text(`${$otherAdditions}`, 15, 260);
+		}
 	}
+
 	$dateDoc = document.querySelector('#dateDoc').value;
 	doc.text(`Дата  ${reverseValueDate($dateDoc)}р.`, 5, 290);
 	//signature str
@@ -191,6 +197,5 @@ function chekingCancellation() {
 }
 function reverseValueDate(dateReverse) {
 	let massive = dateReverse.split('-').reverse();
-
 	return massive.toString().replace(',', '-').replace(',', '-');
 }
