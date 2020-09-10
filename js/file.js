@@ -22,7 +22,16 @@ let $dateCopyOfTheAct = document.querySelector('#dateCopyOfTheAct').value = mome
 let $aCopyOfTheDocumentConfirmingTheCostOfSending = document.querySelector('#aCopyOfTheDocumentConfirmingTheCostOfSending');
 let $dateDoc = document.querySelector('#dateDoc').value = moment().format('YYYY-MM-DD');
 let $otherAdditions = document.querySelector('#otherAdditions').value;
-
+let $clientSignature = document.querySelector('#clientSignature');
+let urlClientSignature;
+//check url clientSignature
+$clientSignature.addEventListener('change', (event) => {
+	var oFReader = new FileReader();
+	oFReader.readAsDataURL(document.querySelector('#clientSignature').files[0]);
+	oFReader.onload = function (oFREvent) {
+		urlClientSignature = oFREvent.target.result;
+	};
+});
 // cancellation
 document.querySelector('h3').addEventListener('click', () => {
 	$price = document.querySelector('#price').value;
@@ -100,8 +109,8 @@ function documentWriter() {
 	doc.text('Ідентифікаційний код юридичної особи або ІПН ФОП', 5, 230);
 	doc.text(`${$identificationCode}`, 5, 235);
 	//signature img
-	doc.addImage("img/10-53-04.jpg", "JPEG", 120, 220, 46, 34);
-	doc.addImage("img/10-53-04.jpg", "JPEG", 120, 260, 46, 34);
+	doc.addImage(`${urlClientSignature}`, "JPEG", 120, 220, 46, 34);
+	doc.addImage(`${urlClientSignature}`, "JPEG", 120, 260, 46, 34);
 	// requisites right column
 	doc.text("Розрахунковий рахунок", 110, 215);
 	doc.text(`${$currentAccount}`, 110, 220);
@@ -123,15 +132,11 @@ function documentWriter() {
 			doc.text(`${$otherAdditions}`, 15, 260);
 		}
 	}
-
 	$dateDoc = document.querySelector('#dateDoc').value;
 	doc.text(`Дата  ${reverseValueDate($dateDoc)}р.`, 5, 290);
 	//signature str
 	doc.text('Підпис Клієнта __________________', 110, 240);
 	doc.text('Підпис Клієнта __________________', 110, 282);
-	// Ідентифікаційний код юридичної особи або ІПН ФОП
-	// var strArr = doc.splitTextToSize("A longer title that might be split", 50)
-	// doc.text(strArr, 50, 50);
 }
 //save doc
 start.addEventListener('click', () => {
