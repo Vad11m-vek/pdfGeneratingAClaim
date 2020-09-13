@@ -24,26 +24,65 @@ let $dateDoc = document.querySelector('#dateDoc').value = moment().format('YYYY-
 let $otherAdditions = document.querySelector('#otherAdditions').value;
 let $clientSignature = document.querySelector('#clientSignature');
 let urlClientSignature;
+let claimDetails = {
+	nameOfTheLegalEntity: '',
+	TINorUSREOU: '',
+	Location: '',
+	tel: '',
+	emailUser: '',
+	nameOfThePerson: '',
+	identificationCode: '',
+	currentAccount: '',
+	MFIBank: '',
+	clientSignature: '',
+};
+document.querySelector('h3').addEventListener('click', () => {
+	let claimDetailCookie = JSON.parse(getCookie('claimDetail'));
+	console.log(claimDetailCookie);
+	$nameOfTheLegalEntity = claimDetailCookie.nameOfTheLegalEntity;
+	$TINorUSREOU = claimDetailCookie.TINorUSREOU;
+	$Location = claimDetailCookie.Location;
+	$tel = claimDetailCookie.tel;
+	$emailUser = claimDetailCookie.emailUser;
+	$nameOfThePerson = claimDetailCookie.nameOfThePerson;
+	$identificationCode = claimDetailCookie.identificationCode;
+	$currentAccount = claimDetailCookie.currentAccount;
+	$MFIBank = claimDetailCookie.MFIBank;
+	$clientSignature.value = claimDetailCookie.clientSignature;
+})
+// let claimDetail = 'claimDetail';
 //check url clientSignature
 $clientSignature.addEventListener('change', (event) => {
-	var oFReader = new FileReader();
+	let oFReader = new FileReader();
 	oFReader.readAsDataURL(document.querySelector('#clientSignature').files[0]);
 	oFReader.onload = function (oFREvent) {
 		urlClientSignature = oFREvent.target.result;
 	};
 });
 // cancellation
-document.querySelector('h3').addEventListener('click', () => {
-	$price = document.querySelector('#price').value;
-	if ($price.length == 0) {
-		console.log($price.length);
-	} else {
-		console.log('veloseped');
-	}
-})
+// document.querySelector('h3').addEventListener('click', () => {
+// 	$price = document.querySelector('#price').value;
+// 	if ($price.length == 0) {
+// 		console.log($price.length);
+// 	} else {
+// 		console.log('veloseped');
+// 	}
+// })
 
 let doc = new jsPDF();
 function documentWriter() {
+	//get new value
+	$nameOfTheLegalEntity = document.querySelector('#nameOfTheLegalEntity').value;
+	$TINorUSREOU = document.querySelector('#TINorUSREOU').value;
+	$Location = document.querySelector('#Location').value;
+	$tel = document.querySelector('#tel').value;
+	$emailUser = document.querySelector('#emailUser').value;
+	$nameOfThePerson = document.querySelector('#nameOfThePerson').value;
+	$identificationCode = document.querySelector('#identificationCode').value;
+	$currentAccount = document.querySelector('#currentAccount').value;
+	$MFIBank = document.querySelector('#MFIBank').value;
+	$copyOfTheAct = document.querySelector('#copyOfTheAct');
+	//write pdf
 	doc.setFontSize(11);
 	doc.addFont("font/PTSans.ttf", "PTSans", "normal");
 	doc.setFont("PTSans");
@@ -137,6 +176,18 @@ function documentWriter() {
 	//signature str
 	doc.text('Підпис Клієнта __________________', 110, 240);
 	doc.text('Підпис Клієнта __________________', 110, 282);
+	//record Json
+	claimDetails.nameOfTheLegalEntity = $nameOfTheLegalEntity;
+	claimDetails.TINorUSREOU = $TINorUSREOU;
+	claimDetails.Location = $Location;
+	claimDetails.tel = $tel;
+	claimDetails.emailUser = $emailUser;
+	claimDetails.nameOfThePerson = $nameOfThePerson;
+	claimDetails.identificationCode = $identificationCode;
+	claimDetails.currentAccount = $currentAccount;
+	claimDetails.MFIBank = $MFIBank;
+	claimDetails.clientSignature = $clientSignature.value;
+	setCookie('claimDetail', JSON.stringify(claimDetails), 360);
 }
 //save doc
 start.addEventListener('click', () => {
@@ -144,14 +195,15 @@ start.addEventListener('click', () => {
 	chekingReimburse();
 	chekingCancellation();
 	documentWriter();
-	var string = doc.output('datauristring');
-	var embed = "<embed width='100%' height='100%' src='" + string + "' />"
-	var x = window.open();
+	let string = doc.output('datauristring');
+	let embed = "<embed width='100%' height='100%' src='" + string + "' />"
+	let x = window.open();
 	x.document.open();
 	x.document.write(embed);
 	x.document.close();
 	// doc.save('hello_world.pdf')
 });
+//cheking or ampty value and get . , ; and function reverse time
 function checkingAbout() {
 	for (i in $defectCollection) {
 		if ($defectCollection[i].checked == true) {
@@ -203,4 +255,30 @@ function chekingCancellation() {
 function reverseValueDate(dateReverse) {
 	let massive = dateReverse.split('-').reverse();
 	return massive.toString().replace(',', '-').replace(',', '-');
+}
+// Cookie functions
+function getCookieValue(name) {
+	let matches = document.cookie.match(new RegExp(
+		"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+	));
+	return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+function setCookie(name, value, days) {
+	let expires = "";
+	if (days) {
+		let date = new Date();
+		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+		expires = "; expires=" + date.toUTCString();
+	}
+	document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+function getCookie(name) {
+	let nameEQ = name + "=";
+	let ca = document.cookie.split(';');
+	for (let i = 0; i < ca.length; i++) {
+		let c = ca[i];
+		while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+	}
+	return null;
 }
