@@ -147,19 +147,20 @@ function documentWriter() {
 		doc.text("Додатки : ", 5, 245);
 		if ($copyOfTheAct.checked) {
 			$dateCopyOfTheAct = document.querySelector('#dateCopyOfTheAct');
-			doc.text(`Копія Акта приймання-передачі від ${reverseValueDate($dateCopyOfTheAct.value)}р., складеного з представником ТОВ «Нова Пошта».`, 5, 250);
+			doc.text(`Копія Акта приймання-передачі від ${$dateCopyOfTheAct.value}р., складеного з представником ТОВ «Нова Пошта».`, 5, 250);
 		}
 		if ($aCopyOfTheDocumentConfirmingTheCostOfSending.checked) {
 			doc.text('Копія документа, який підтверджує вартість відправлення.', 5, 255);
 		}
 		$otherAdditions = document.querySelector('#otherAdditions');
 		if ($otherAdditions != 0) {
+
 			doc.text('інше : ', 5, 260);
 			doc.text(`${$otherAdditions.value}`, 15, 260);
 		}
 	}
 	$dateDoc = document.querySelector('#dateDoc');
-	doc.text(`Дата  ${reverseValueDate($dateDoc.value)}р.`, 5, 290);
+	doc.text(`Дата  ${$dateDoc.values}р.`, 5, 290);
 	//signature str
 	doc.text('Підпис Клієнта __________________', 110, 240);
 	doc.text('Підпис Клієнта __________________', 110, 282);
