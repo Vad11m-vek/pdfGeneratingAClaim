@@ -240,10 +240,10 @@ function chekingCancellation() {
 	}
 	return reimburseReasonCollection;
 }
-function reverseValueDate(dateReverse) {
-	let massive = dateReverse.split('-').reverse();
-	return massive.toString().replace(',', '-').replace(',', '-');
-}
+// function reverseValueDate(dateReverse) {
+// 	let massive = dateReverse.split('-').reverse();
+// 	return massive.toString().replace(',', '-').replace(',', '-');
+// }
 // Cookie functions
 function getCookieValue(name) {
 	let matches = document.cookie.match(new RegExp(
