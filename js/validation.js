@@ -1,8 +1,8 @@
 document.querySelector('#tel').addEventListener('change', e => {
 	var numbers = tel.value.replace(/\D/g, ''),
-		char = { 0: '( ', 3: ' ) ', 6: ' - ', 8: ' - ' };
+		char = { 2: ' ( ', 5: ' ) ', 8: ' - ', 10: ' - ' };
 	tel.value = '';
-	for (var i = 0; i < 10; i++) {
+	for (var i = 0; i < 12; i++) {
 		tel.value += (char[i] || '') + numbers[i];
 	}
 })

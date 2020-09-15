@@ -145,22 +145,21 @@ function documentWriter() {
 	//Additions Додатки:
 	if ($copyOfTheAct.checked || $aCopyOfTheDocumentConfirmingTheCostOfSending.checked || ($otherAdditions.value != 0)) {
 		doc.text("Додатки : ", 5, 245);
+		$otherAdditions = document.querySelector('#otherAdditions');
 		if ($copyOfTheAct.checked) {
 			$dateCopyOfTheAct = document.querySelector('#dateCopyOfTheAct');
-			doc.text(`Копія Акта приймання-передачі від ${$dateCopyOfTheAct.value}р., складеного з представником ТОВ «Нова Пошта».`, 5, 250);
+			doc.text(`Копія Акта приймання-передачі від ${reverseValueDate($dateCopyOfTheAct.value)}р., складеного з представником ТОВ «Нова Пошта».`, 5, 250);
 		}
 		if ($aCopyOfTheDocumentConfirmingTheCostOfSending.checked) {
 			doc.text('Копія документа, який підтверджує вартість відправлення.', 5, 255);
 		}
-		$otherAdditions = document.querySelector('#otherAdditions');
 		if ($otherAdditions != 0) {
-
 			doc.text('інше : ', 5, 260);
 			doc.text(`${$otherAdditions.value}`, 15, 260);
 		}
 	}
 	$dateDoc = document.querySelector('#dateDoc');
-	doc.text(`Дата  ${$dateDoc.values}р.`, 5, 290);
+	doc.text(`Дата  ${reverseValueDate($dateDoc.value)}р.`, 5, 290);
 	//signature str
 	doc.text('Підпис Клієнта __________________', 110, 240);
 	doc.text('Підпис Клієнта __________________', 110, 282);
@@ -185,12 +184,20 @@ start.addEventListener('click', () => {
 	documentWriter();
 	let string = doc.output('datauristring');
 	let embed = "<embed width='100%' height='100%' src='" + string + "' />"
+	doc.save(`ПретензіяЕН${$invoiceNumber.value}.pdf`)
+});
+openWindow.addEventListener('click', () => {
+	checkingAbout();
+	chekingReimburse();
+	chekingCancellation();
+	documentWriter();
+	let string = doc.output('datauristring');
+	let embed = "<embed width='100%' height='100%' src='" + string + "' />"
 	let x = window.open();
 	x.document.open();
 	x.document.write(embed);
 	x.document.close();
-	// doc.save('hello_world.pdf')
-});
+})
 //cheking or ampty value and get . , ; and function reverse time
 function checkingAbout() {
 	for (i in $defectCollection) {
@@ -240,10 +247,10 @@ function chekingCancellation() {
 	}
 	return reimburseReasonCollection;
 }
-// function reverseValueDate(dateReverse) {
-// 	let massive = dateReverse.split('-').reverse();
-// 	return massive.toString().replace(',', '-').replace(',', '-');
-// }
+function reverseValueDate(dateReverse) {
+	let massive = dateReverse.split('-').reverse();
+	return massive.toString().replace(',', '-').replace(',', '-');
+}
 // Cookie functions
 function getCookieValue(name) {
 	let matches = document.cookie.match(new RegExp(
