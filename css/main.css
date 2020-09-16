@@ -124,6 +124,7 @@
   -webkit-appearance: textfield;
      -moz-appearance: textfield;
           appearance: textfield;
+  width: 70%;
 }
 
 #invoiceNumber::-webkit-outer-spin-button,

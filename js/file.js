@@ -104,26 +104,29 @@ function documentWriter() {
 	doc.text(defectReason, 30, 90);
 	let textDuringTransportation = doc.splitTextToSize('відправлення, що сталося під час надання послуги з організації його перевезення за експрес-накладною', 200)
 	doc.text(textDuringTransportation, 8, 100);
-	doc.text(`№ ${$invoiceNumber.value} прошу :`, 8, 105);
+	doc.text(`№ ${$invoiceNumber.value}`, 8, 105);
+	console.log(invoiceNumber.value);
+
+	doc.text(`прошу :`, 8, 110);
 	// nead update price
 	$price = document.querySelector('#price');
 	if ($price.value.length != 0) {
-		doc.text(`відшкодувати вартість відправлення в розмірі ${$price.value} грн.`, 8, 110);
+		doc.text(`відшкодувати вартість відправлення в розмірі ${$price.value} грн.`, 8, 115);
 	}
 	if (reimburseReasonCollection.length != 0) {
-		doc.text(`відшкодувати сплачену вартість${reimburseReasonCollection}`, 8, 115);
+		doc.text(`відшкодувати сплачену вартість${reimburseReasonCollection}`, 8, 120);
 	}
 	if (cancellationReasonCollection.length != 0) {
-		doc.text(`анулювати нараховану плату за${cancellationReasonCollection}`, 8, 120);
+		doc.text(`анулювати нараховану плату за${cancellationReasonCollection}`, 8, 125);
 	}
 	$otherProblem = document.querySelector('#otherProblem');
 	if ($otherProblem.value.length != 0) {
-		doc.text('інше : ', 8, 125);
+		doc.text('інше : ', 8, 130);
 		let strotherProblem = doc.splitTextToSize('' + $otherProblem.value, 190)
-		doc.text(strotherProblem, 21, 125);
+		doc.text(strotherProblem, 21, 130);
 	}
 	//about problem
-	doc.text('Суть проблеми / опис відправлення: ', 8, 135);
+	doc.text('Суть проблеми / опис відправлення: ', 8, 140);
 	let strTheEssenceOfTheProblem = doc.splitTextToSize('' + $theEssenceOfTheProblem.value, 200)
 	doc.text(strTheEssenceOfTheProblem, 8, 140);
 	let textCommentDetails = doc.splitTextToSize('У випадку прийняття рішення щодо оплати суми передбаченої цією претензією (або її частини), зазначені кошти прошу перерахувати на наступні реквізити', 200)
