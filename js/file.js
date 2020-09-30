@@ -128,44 +128,46 @@ function documentWriter() {
 	//about problem
 	doc.text('Суть проблеми / опис відправлення: ', 8, 140);
 	let strTheEssenceOfTheProblem = doc.splitTextToSize('' + $theEssenceOfTheProblem.value, 200)
-	doc.text(strTheEssenceOfTheProblem, 8, 140);
-	let textCommentDetails = doc.splitTextToSize('У випадку прийняття рішення щодо оплати суми передбаченої цією претензією (або її частини), зазначені кошти прошу перерахувати на наступні реквізити', 200)
-	doc.text(textCommentDetails, 8, 200);
+	doc.text(strTheEssenceOfTheProblem, 8, 145);
+	doc.setFontSize(8);
+	let textCommentDetails = doc.splitTextToSize('У випадку прийняття рішення щодо оплати суми передбаченої цією претензією (або її частини), зазначені кошти прошу перерахувати на наступні реквізити', 155)
+	doc.setFontSize(10);
+	doc.text(textCommentDetails, 5, 235);
 	// requisites left column
-	doc.text("Найменування юридичної особи / ФОП", 5, 215);
+	doc.text("Найменування юридичної особи / ФОП", 5, 245);
 	let textNameOfThePerson = doc.splitTextToSize('' + $nameOfThePerson.value, 110)
-	doc.text(textNameOfThePerson, 5, 220);
-	doc.text('Ідентифікаційний код юридичної особи або ІПН ФОП', 5, 230);
-	doc.text(`${$identificationCode.value}`, 5, 235);
+	doc.text(textNameOfThePerson, 5, 250);
+	doc.text('Ідентифікаційний код юридичної особи або ІПН ФОП', 5, 260);
+	doc.text(`${$identificationCode.value}`, 5, 265);
 	//signature img
-	doc.addImage(`${img.src}`, "JPEG", 120, 220, 46, 34);
-	doc.addImage(`${img.src}`, "JPEG", 120, 260, 46, 34);
+	// doc.addImage(`${img.src}`, "JPEG", 140, 250, 46, 34);
+	doc.addImage(`${img.src}`, "JPEG", 120, 263, 46, 34);
 	// requisites right column
-	doc.text("Розрахунковий рахунок", 110, 215);
-	doc.text(`${$currentAccount.value}`, 110, 220);
-	doc.text("МФО банку : ", 110, 225);
-	doc.text(`${$MFIBank.value}`, 130, 225);
+	doc.text("Розрахунковий рахунок", 110, 255);
+	doc.text(`${$currentAccount.value}`, 110, 260);
+	doc.text("МФО банку : ", 110, 265);
+	doc.text(`${$MFIBank.value}`, 130, 265);
 	//Additions Додатки:
 	if ($copyOfTheAct.checked || $aCopyOfTheDocumentConfirmingTheCostOfSending.checked || ($otherAdditions.value != 0)) {
-		doc.text("Додатки : ", 5, 245);
+		doc.text("Додатки : ", 5, 270);
 		$otherAdditions = document.querySelector('#otherAdditions');
 		if ($copyOfTheAct.checked) {
 			$dateCopyOfTheAct = document.querySelector('#dateCopyOfTheAct');
-			doc.text(`Копія Акта приймання-передачі від ${reverseValueDate($dateCopyOfTheAct.value)}р., складеного з представником ТОВ «Нова Пошта».`, 5, 250);
+			doc.text(`Копія Акта приймання-передачі від ${reverseValueDate($dateCopyOfTheAct.value)}р., складеного з представником ТОВ «Нова Пошта».`, 5, 275);
 		}
 		if ($aCopyOfTheDocumentConfirmingTheCostOfSending.checked) {
-			doc.text('Копія документа, який підтверджує вартість відправлення.', 5, 255);
+			doc.text('Копія документа, який підтверджує вартість відправлення.', 5, 280);
 		}
 		if ($otherAdditions != 0) {
-			doc.text('інше : ', 5, 260);
-			doc.text(`${$otherAdditions.value}`, 15, 260);
+			doc.text('інше : ', 5, 285);
+			doc.text(`${$otherAdditions.value}`, 15, 285);
 		}
 	}
 	$dateDoc = document.querySelector('#dateDoc');
-	doc.text(`Дата  ${reverseValueDate($dateDoc.value)}р.`, 5, 290);
+	doc.text(`Дата  ${reverseValueDate($dateDoc.value)}р.`, 5, 292);
 	//signature str
-	doc.text('Підпис Клієнта __________________', 110, 240);
-	doc.text('Підпис Клієнта __________________', 110, 282);
+	// doc.text('Підпис Клієнта __________________', 110, 270);
+	doc.text('Підпис Клієнта __________________', 110, 292);
 	//record Json
 	claimDetails.nameOfTheLegalEntity = $nameOfTheLegalEntity.value;
 	claimDetails.TINorUSREOU = $TINorUSREOU.value;
@@ -252,7 +254,7 @@ function chekingCancellation() {
 }
 function reverseValueDate(dateReverse) {
 	let massive = dateReverse.split('-').reverse();
-	return massive.toString().replace(',', '-').replace(',', '-');
+	return massive.toString().replace(',', '/').replace(',', '/');
 }
 // Cookie functions
 function getCookieValue(name) {
