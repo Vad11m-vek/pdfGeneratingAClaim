@@ -105,8 +105,6 @@ function documentWriter() {
 	let textDuringTransportation = doc.splitTextToSize('відправлення, що сталося під час надання послуги з організації його перевезення за експрес-накладною', 200)
 	doc.text(textDuringTransportation, 8, 100);
 	doc.text(`№ ${$invoiceNumber.value}`, 8, 105);
-	console.log(invoiceNumber.value);
-
 	doc.text(`прошу :`, 8, 110);
 	// nead update price
 	$price = document.querySelector('#price');
@@ -168,6 +166,9 @@ function documentWriter() {
 	//signature str
 	// doc.text('Підпис Клієнта __________________', 110, 270);
 	doc.text('Підпис Клієнта __________________', 110, 292);
+	//signature of author
+	doc.setFontSize(7);
+	doc.text('supported by Vad11m', 180, 295);
 	//record Json
 	claimDetails.nameOfTheLegalEntity = $nameOfTheLegalEntity.value;
 	claimDetails.TINorUSREOU = $TINorUSREOU.value;
@@ -287,8 +288,6 @@ function getCookie(name) {
 var bannerImage = document.getElementById('clientSignature');
 var result = document.getElementById('res');
 var img = document.getElementById('tableBanner');
-
-// 
 bannerImage.addEventListener('change', function () {
 	var file = this.files[0];
 	// declare a maxSize (3Mb)
@@ -328,14 +327,11 @@ bannerImage.addEventListener('change', function () {
 		}
 		img.src = fReader.result;
 	};
-
 	fReader.readAsDataURL(file);
 });
-
 function getBase64Image(img, sizeRatio, type, quality) {
 	// if we've got an svg, don't convert it, svg will certainly be less big than any pixel image
 	if (type.indexOf('svg+xml') > 0) return img.src;
-
 	// if we've got a jpeg
 	if (type.match(/jpe?g/)) {
 		// and the sizeRatio is okay, don't convert it
@@ -343,25 +339,20 @@ function getBase64Image(img, sizeRatio, type, quality) {
 	}
 	// if we've got some other image type
 	else type = 'image/png';
-
 	if (!quality) quality = 1;
 	var canvas = document.createElement("canvas");
 	// if our image file is too large, then reduce its size
 	canvas.width = (sizeRatio > 1) ? (img.width / sizeRatio) : img.width;
 	canvas.height = (sizeRatio > 1) ? (img.height / sizeRatio) : img.height;
-
 	var ctx = canvas.getContext("2d");
 	ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 	// if we already tried to reduce its size but it's still failing, then reduce the jpeg quality
 	var dataURL = canvas.toDataURL(type, quality);
-
 	return dataURL;
 }
-
 function fetchimage() {
 	var dataImage = localStorage.getItem('imgData');
 	img.src = dataImage;
 }
-
 // Call fetch to get image from localStorage.
 fetchimage();
