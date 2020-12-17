@@ -14,7 +14,7 @@ document.addEventListener('click', event => {
 		}
 		let email = document.querySelector('emailUser');
 
-		console.log(validateEmail(email));
+		// console.log(validateEmail(email));
 
 	}
 

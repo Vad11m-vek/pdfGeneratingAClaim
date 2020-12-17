@@ -18,7 +18,6 @@ let $identificationCode = document.querySelector('#identificationCode');
 let $currentAccount = document.querySelector('#currentAccount');
 let $MFIBank = document.querySelector('#MFIBank');
 let $copyOfTheAct = document.querySelector('#copyOfTheAct');
-let $dateCopyOfTheAct = document.querySelector('#dateCopyOfTheAct').value = moment().format('YYYY-MM-DD');
 let $aCopyOfTheDocumentConfirmingTheCostOfSending = document.querySelector('#aCopyOfTheDocumentConfirmingTheCostOfSending');
 let $dateDoc = document.querySelector('#dateDoc').value = moment().format('YYYY-MM-DD');
 let $otherAdditions = document.querySelector('#otherAdditions');
@@ -44,18 +43,18 @@ $clientSignature.addEventListener('change', event => {
 		urlClientSignature = oFREvent.target.result;
 	};
 });
-if (getCookie('claimDetail')) {
-	let claimDetailCookie = JSON.parse(getCookie('claimDetail'));
-	$nameOfTheLegalEntity.value = claimDetailCookie.nameOfTheLegalEntity;
-	$TINorUSREOU.value = claimDetailCookie.TINorUSREOU;
-	$Location.value = claimDetailCookie.Location;
-	$tel.value = claimDetailCookie.tel;
-	$emailUser.value = claimDetailCookie.emailUser;
-	$nameOfThePerson.value = claimDetailCookie.nameOfThePerson;
-	$identificationCode.value = claimDetailCookie.identificationCode;
-	$currentAccount.value = claimDetailCookie.currentAccount;
-	$MFIBank.value = claimDetailCookie.MFIBank;
-}
+// if (getCookie('claimDetail')) {
+// 	let claimDetailCookie = JSON.parse(getCookie('claimDetail'));
+// 	$nameOfTheLegalEntity.value = claimDetailCookie.nameOfTheLegalEntity;
+// 	$TINorUSREOU.value = claimDetailCookie.TINorUSREOU;
+// 	$Location.value = claimDetailCookie.Location;
+// 	$tel.value = claimDetailCookie.tel;
+// 	$emailUser.value = claimDetailCookie.emailUser;
+// 	$nameOfThePerson.value = claimDetailCookie.nameOfThePerson;
+// 	$identificationCode.value = claimDetailCookie.identificationCode;
+// 	$currentAccount.value = claimDetailCookie.currentAccount;
+// 	$MFIBank.value = claimDetailCookie.MFIBank;
+// }
 let doc = new jsPDF();
 function documentWriter() {
 	//get new value
@@ -64,16 +63,11 @@ function documentWriter() {
 	$Location = document.querySelector('#Location');
 	$tel = document.querySelector('#tel');
 	$emailUser = document.querySelector('#emailUser');
-	$nameOfThePerson = document.querySelector('#nameOfThePerson');
 	$identificationCode = document.querySelector('#identificationCode');
-	$currentAccount = document.querySelector('#currentAccount');
-	$MFIBank = document.querySelector('#MFIBank');
-	$copyOfTheAct = document.querySelector('#copyOfTheAct');
 	//write pdf
 	doc.setFontSize(11);
 	doc.addFont("font/PTSans.ttf", "PTSans", "normal");
 	doc.setFont("PTSans");
-	doc.text("Бланк претензії для – юридичних осіб та ФОП", 110, 15);
 	doc.text('ТОВ «Нова Пошта»', 110, 20);
 	//out name
 	let strNameOfTheLegalEntity = doc.splitTextToSize('' + $nameOfTheLegalEntity.value, 100)
@@ -96,75 +90,20 @@ function documentWriter() {
 	doc.text(strEmailUser, 150, 70);
 	//declare
 	doc.setFontSize(17);
-	doc.text("ПРЕТЕНЗІЯ", 80, 80);
+	doc.text("Заява", 80, 80);
 	doc.setFontSize(11);
-	//reason
-	doc.text("У зв’язку з ", 8, 90);
-	let defectReason = doc.splitTextToSize('' + defectReasonCollection, 190)
-	doc.text(defectReason, 30, 90);
-	let textDuringTransportation = doc.splitTextToSize('відправлення, що сталося під час надання послуги з організації його перевезення за експрес-накладною', 200)
-	doc.text(textDuringTransportation, 8, 100);
-	doc.text(`№ ${$invoiceNumber.value}`, 8, 105);
-	doc.text(`прошу :`, 8, 110);
-	// nead update price
-	$price = document.querySelector('#price');
-	if ($price.value.length != 0) {
-		doc.text(`відшкодувати вартість відправлення в розмірі ${$price.value} грн.`, 8, 115);
-	}
-	if (reimburseReasonCollection.length != 0) {
-		doc.text(`відшкодувати сплачену вартість${reimburseReasonCollection}`, 8, 120);
-	}
-	if (cancellationReasonCollection.length != 0) {
-		doc.text(`анулювати нараховану плату за${cancellationReasonCollection}`, 8, 125);
-	}
-	$otherProblem = document.querySelector('#otherProblem');
-	if ($otherProblem.value.length != 0) {
-		doc.text('інше : ', 8, 130);
-		let strotherProblem = doc.splitTextToSize('' + $otherProblem.value, 190)
-		doc.text(strotherProblem, 21, 130);
-	}
 	//about problem
-	doc.text('Суть проблеми / опис відправлення: ', 8, 140);
+	// doc.text('Суть проблеми / опис відправлення: ', 8, 140);
 	let strTheEssenceOfTheProblem = doc.splitTextToSize('' + $theEssenceOfTheProblem.value, 200)
 	doc.text(strTheEssenceOfTheProblem, 8, 145);
 	doc.setFontSize(8);
-	let textCommentDetails = doc.splitTextToSize('У випадку прийняття рішення щодо оплати суми передбаченої цією претензією (або її частини), зазначені кошти прошу перерахувати на наступні реквізити', 155)
-	doc.setFontSize(10);
-	doc.text(textCommentDetails, 5, 235);
-	// requisites left column
-	doc.text("Найменування юридичної особи / ФОП", 5, 245);
-	let textNameOfThePerson = doc.splitTextToSize('' + $nameOfThePerson.value, 110)
-	doc.text(textNameOfThePerson, 5, 250);
-	doc.text('Ідентифікаційний код юридичної особи або ІПН ФОП', 5, 260);
-	doc.text(`${$identificationCode.value}`, 5, 265);
 	//signature img
 	// doc.addImage(`${img.src}`, "JPEG", 140, 250, 46, 34);
 	doc.addImage(`${img.src}`, "JPEG", 120, 263, 46, 34);
-	// requisites right column
-	doc.text("Розрахунковий рахунок", 110, 255);
-	doc.text(`${$currentAccount.value}`, 110, 260);
-	doc.text("МФО банку : ", 110, 265);
-	doc.text(`${$MFIBank.value}`, 130, 265);
 	//Additions Додатки:
-	if ($copyOfTheAct.checked || $aCopyOfTheDocumentConfirmingTheCostOfSending.checked || ($otherAdditions.value != 0)) {
-		doc.text("Додатки : ", 5, 270);
-		$otherAdditions = document.querySelector('#otherAdditions');
-		if ($copyOfTheAct.checked) {
-			$dateCopyOfTheAct = document.querySelector('#dateCopyOfTheAct');
-			doc.text(`Копія Акта приймання-передачі від ${reverseValueDate($dateCopyOfTheAct.value)}р., складеного з представником ТОВ «Нова Пошта».`, 5, 275);
-		}
-		if ($aCopyOfTheDocumentConfirmingTheCostOfSending.checked) {
-			doc.text('Копія документа, який підтверджує вартість відправлення.', 5, 280);
-		}
-		if ($otherAdditions != 0) {
-			doc.text('інше : ', 5, 285);
-			doc.text(`${$otherAdditions.value}`, 15, 285);
-		}
-	}
 	$dateDoc = document.querySelector('#dateDoc');
 	doc.text(`Дата  ${reverseValueDate($dateDoc.value)}р.`, 5, 292);
 	//signature str
-	// doc.text('Підпис Клієнта __________________', 110, 270);
 	doc.text('Підпис Клієнта __________________', 110, 292);
 	//signature of author
 	doc.setFontSize(7);
@@ -175,10 +114,6 @@ function documentWriter() {
 	claimDetails.Location = $Location.value;
 	claimDetails.tel = $tel.value;
 	claimDetails.emailUser = $emailUser.value;
-	claimDetails.nameOfThePerson = $nameOfThePerson.value;
-	claimDetails.identificationCode = $identificationCode.value;
-	claimDetails.currentAccount = $currentAccount.value;
-	claimDetails.MFIBank = $MFIBank.value;
 	claimDetails.clientSignature = $clientSignature.value;
 	setCookie('claimDetail', JSON.stringify(claimDetails), 360);
 }
@@ -193,7 +128,6 @@ start.addEventListener('click', () => {
 	doc.save(`ПретензіяЕН${$invoiceNumber.value}.pdf`)
 });
 openWindow.addEventListener('click', () => {
-	checkingAbout();
 	chekingReimburse();
 	chekingCancellation();
 	documentWriter();
@@ -205,22 +139,7 @@ openWindow.addEventListener('click', () => {
 	x.document.close();
 })
 //cheking or ampty value and get . , ; and function reverse time
-function checkingAbout() {
-	for (i in $defectCollection) {
-		if ($defectCollection[i].checked == true) {
-			if (!defectReasonCollection) {
-				defectReasonCollection += $defectCollection[i].value;
-			} else {
-				defectReasonCollection += ',';
-				defectReasonCollection += $defectCollection[i].value;
-			}
-		}
-	}
-	if (!defectReasonCollection) {
-		defectReasonCollection += document.querySelector('#others').value;
-	}
-	return defectReasonCollection;
-}
+
 function chekingReimburse() {
 	for (i in $reimburseCollection) {
 		if ($reimburseCollection[i].checked == true) {
