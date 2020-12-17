@@ -95,12 +95,12 @@ function documentWriter() {
 	doc.setFontSize(8);
 	//signature img
 	// doc.addImage(`${img.src}`, "JPEG", 140, 250, 46, 34);
-	doc.addImage(`${img.src}`, "JPEG", 120, 263, 46, 34);
+	doc.addImage(`${img.src}`, "JPEG", 120, 243, 46, 34);
 	//Additions Додатки:
 	$dateDoc = document.querySelector('#dateDoc');
-	doc.text(`Дата  ${reverseValueDate($dateDoc.value)}р.`, 5, 292);
+	doc.text(`Дата  ${reverseValueDate($dateDoc.value)}р.`, 5, 262);
 	//signature str
-	doc.text('Підпис Клієнта __________________', 110, 292);
+	doc.text('Підпис Клієнта __________________', 110, 262);
 	//signature of author
 	doc.setFontSize(7);
 	doc.text('supported by Vad11m', 180, 295);
@@ -121,11 +121,11 @@ start.addEventListener('click', () => {
 	documentWriter();
 	let string = doc.output('datauristring');
 	let embed = "<embed width='100%' height='100%' src='" + string + "' />"
-	doc.save(`ПретензіяЕН${$invoiceNumber.value}.pdf`)
+	doc.save(`Заява.pdf`)
 });
 openWindow.addEventListener('click', () => {
-	chekingReimburse();
-	chekingCancellation();
+	// chekingReimburse();
+	// chekingCancellation();
 	documentWriter();
 	let string = doc.output('datauristring');
 	let embed = "<embed width='100%' height='100%' src='" + string + "' />"
