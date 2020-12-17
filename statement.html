@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<link rel="icon" href="../img/icon/favicon.ico">
+	<link rel="stylesheet" href="css/main.css">
+	<title>Бланк Заяви для – юридичних осіб та ФОП</title>
+</head>
+
+<body>
+	<h1>Бланк Заяви для – юридичних осіб та ФОП</h1>
+	<div class="wrapper_page">
+		<div class="column_write">
+			<div class="wrapper_header">
+				<div class="header_np">
+					<div>Бланк претензії для – юридичних осіб та ФОП <br>
+						ТОВ «Нова Пошта»</div>
+					<textarea name="comment" cols="40" rows="2" id="nameOfTheLegalEntity"></textarea>
+					<label for="nameOfTheLegalEntity">
+						<div class="comment">
+							(Найменування юридичної особи або П.І.Б. ФОП)
+						</div>
+					</label>
+					<div>
+						<label for="TINorUSREOU">
+							ІПН або ЄДРПОУ
+						</label>
+					</div>
+					<input type="text" id="TINorUSREOU">
+					<div>
+						<label for="Location">
+							Місцезнаходження
+						</label>
+					</div>
+					<textarea name="comment" cols="40" rows="3" id="Location"></textarea>
+					<div>
+						<label for="tel">
+							Моб. тел.
+						</label>
+					</div>
+					<input type="text" id="tel" placeholder="(000) 000-00-00" value="+38 (" required="" minlength="12"
+						maxlength="19">
+					<div>
+						<label for="emailUser">
+							Ел. пошта
+						</label>
+					</div>
+					<input type="email" id="emailUser">
+				</div>
+			</div>
+			<h3>Заява</h3>
+			<div class="wrapp_text">
+				<div class="commentForProblems">
+					<label for="theEssenceOfTheProblem"> Текст заяви : </label> <br>
+					<textarea name="comment" cols="100" rows="3" id="theEssenceOfTheProblem"></textarea>
+				</div>
+				<div class="dateSignature">
+					<div class="dateDoc">
+						<label for="dateDoc">Дата</label>
+						<input type="date" id="dateDoc">
+					</div>
+					<div class="wrapper_clientSignature">
+						<div class="wrapperOutSignature">
+							<label for="clientSignature">
+								<div class="detailsAcc">
+									Підпис Клієнта :
+								</div>
+								<div class="outSignature">
+									____________________
+								</div>
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="column_pdf">
+			<img src="" id="tableBanner" />
+			<div id="res"></div>
+		</div>
+	</div>
+
+	<input type="button" id="start" value="Download">
+	<input type="button" id="openWindow" value="Open">
+	<div class="ref">
+		<a href="index.html">Бланк Претензії</a>
+	</div>
+	<script type="text/javascript" src="js/moment.js"></script>
+	<script type="text/javascript" src="js/jspdf.min.js"></script>
+	<script type="text/javascript" src="js/statement.js"></script>
+	<script type="text/javascript" src="js/validation.js"></script>
+</body>
+
+</html>
