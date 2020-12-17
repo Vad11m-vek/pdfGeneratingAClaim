@@ -43,18 +43,14 @@ $clientSignature.addEventListener('change', event => {
 		urlClientSignature = oFREvent.target.result;
 	};
 });
-// if (getCookie('claimDetail')) {
-// 	let claimDetailCookie = JSON.parse(getCookie('claimDetail'));
-// 	$nameOfTheLegalEntity.value = claimDetailCookie.nameOfTheLegalEntity;
-// 	$TINorUSREOU.value = claimDetailCookie.TINorUSREOU;
-// 	$Location.value = claimDetailCookie.Location;
-// 	$tel.value = claimDetailCookie.tel;
-// 	$emailUser.value = claimDetailCookie.emailUser;
-// 	$nameOfThePerson.value = claimDetailCookie.nameOfThePerson;
-// 	$identificationCode.value = claimDetailCookie.identificationCode;
-// 	$currentAccount.value = claimDetailCookie.currentAccount;
-// 	$MFIBank.value = claimDetailCookie.MFIBank;
-// }
+if (getCookie('claimDetail')) {
+	let claimDetailCookie = JSON.parse(getCookie('claimDetail'));
+	$nameOfTheLegalEntity.value = claimDetailCookie.nameOfTheLegalEntity;
+	$TINorUSREOU.value = claimDetailCookie.TINorUSREOU;
+	$Location.value = claimDetailCookie.Location;
+	$tel.value = claimDetailCookie.tel;
+	$emailUser.value = claimDetailCookie.emailUser;
+}
 let doc = new jsPDF();
 function documentWriter() {
 	//get new value
@@ -140,38 +136,7 @@ openWindow.addEventListener('click', () => {
 })
 //cheking or ampty value and get . , ; and function reverse time
 
-function chekingReimburse() {
-	for (i in $reimburseCollection) {
-		if ($reimburseCollection[i].checked == true) {
-			if (!reimburseReasonCollection) {
-				reimburseReasonCollection += $reimburseCollection[i].value;
-			} else {
-				reimburseReasonCollection += ',';
-				reimburseReasonCollection += $reimburseCollection[i].value;
-			}
-		}
-	}
-	if (reimburseReasonCollection) {
-		reimburseReasonCollection += '.';
-	}
-	return reimburseReasonCollection;
-}
-function chekingCancellation() {
-	for (i in $cancellationCollection) {
-		if ($cancellationCollection[i].checked == true) {
-			if (!cancellationReasonCollection) {
-				cancellationReasonCollection += $cancellationCollection[i].value;
-			} else {
-				cancellationReasonCollection += ',';
-				cancellationReasonCollection += $cancellationCollection[i].value;
-			}
-		}
-	}
-	if (cancellationReasonCollection) {
-		cancellationReasonCollection += ';';
-	}
-	return reimburseReasonCollection;
-}
+
 function reverseValueDate(dateReverse) {
 	let massive = dateReverse.split('-').reverse();
 	return massive.toString().replace(',', '/').replace(',', '/');
